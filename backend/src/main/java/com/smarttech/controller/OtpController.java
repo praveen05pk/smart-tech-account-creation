@@ -24,10 +24,7 @@ public class OtpController {
     }
 
     @GetMapping("/verify-otp")
-    public String verifyOtp(@RequestParam String email,
-                            @RequestParam String otp) {
-        return otpService.verifyOtp(email, otp)
-                ? "OTP verified successfully"
-                : "Invalid or expired OTP";
+    public String verifyOtp(@RequestParam String email, @RequestParam String otp) {
+        return otpService.verifyOtp(email, otp) ? "OTP verified successfully" : "Invalid or expired OTP";
     }
 }
