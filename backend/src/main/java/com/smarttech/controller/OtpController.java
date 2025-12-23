@@ -7,8 +7,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/api/otp")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api")
 public class OtpController {
 
     @Autowired
@@ -17,24 +17,17 @@ public class OtpController {
     @Autowired
     private JavaMailSender mailSender;
 
-    @GetMapping("/send")
+    @GetMapping("/send-otp")
     public String sendOtp(@RequestParam String email) {
-        String otp = otpService.generateOtp(email);
-
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("Smart Tech OTP Verification");
-        message.setText("Your OTP is: " + otp + " (Valid for 5 minutes)");
-
-        mailSender.send(message);
+        otpService.sendOtp(email, mailSender);
         return "OTP sent successfully";
     }
 
-    @GetMapping("/verify")
+    @GetMapping("/verify-otp")
     public String verifyOtp(@RequestParam String email,
                             @RequestParam String otp) {
-        return otpService.validateOtp(email, otp)
-                ? "OTP Verified Successfully"
-                : "Invalid or Expired OTP";
+        return otpService.verifyOtp(email, otp)
+                ? "OTP verified successfully"
+                : "Invalid or expired OTP";
     }
 }
