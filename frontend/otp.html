@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Tech | OTP Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<style>
+body{font-family:Poppins;background:linear-gradient(135deg,#1f4037,#99f2c8);display:flex;justify-content:center;align-items:center;height:100vh}
+.card{background:#fff;padding:30px;width:380px;border-radius:15px;text-align:center}
+input{width:100%;padding:12px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc}
+button{padding:12px;border:none;border-radius:8px;cursor:pointer}
+.submit{background:#2ecc71;color:white;width:45%}
+.cancel{background:#e74c3c;color:white;width:45%}
+.resend{background:none;color:#1f4037;text-decoration:underline;margin-top:10px}
+.timer{font-size:13px;color:#555;margin-bottom:10px}
+</style>
+</head>
+
+<body>
+<div class="card">
+<h2>Email OTP Verification</h2>
+<p class="timer" id="timer">OTP expires in 05:00</p>
+
+<input id="otp" placeholder="Enter OTP">
+
+<div style="display:flex;justify-content:space-between">
+<button class="submit" onclick="verifyOtp()">Submit</button>
+<button class="cancel" onclick="cancel()">Cancel</button>
+</div>
+
+<button class="resend" onclick="resendOtp()">Resend OTP</button>
+</div>
+
+<script>
+let user = JSON.parse(localStorage.getItem("userData"));
+let time = 300;
+
+setInterval(()=>{
+ if(time<=0) return;
+ time--;
+ let m=String(Math.floor(time/60)).padStart(2,"0");
+ let s=String(time%60).padStart(2,"0");
+ timer.innerText=`OTP expires in ${m}:${s}`;
+},1000);
+
+function verifyOtp(){
+ fetch(`https://YOUR-BACKEND-URL/api/verify-otp?email=${user.email}&otp=${otp.value}`)
+ .then(r=>r.text())
+ .then(res=>{
+  if(res==="VERIFIED") alert("Account Created Successfully");
+  else if(res==="EXPIRED") alert("OTP Expired");
+  else alert("Invalid OTP");
+ });
+}
+
+function resendOtp(){
+ fetch(`https://YOUR-BACKEND-URL/api/resend-otp?email=${user.email}`)
+ .then(()=>{alert("OTP resent"); time=300;});
+}
+
+function cancel(){
+ window.location.href="index.html";
+}
+</script>
+</body>
+</html>
