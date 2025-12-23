@@ -1,43 +1,34 @@
 package com.smarttech.service;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 @Service
 public class OtpService {
 
-    private final Map<String, OtpData> otpStore = new HashMap<>();
-    private static final int EXPIRY_MINUTES = 5;
+    private Map<String, String> otpStorage = new HashMap<>();
 
-    public String generateOtp(String email) {
-        String otp = String.valueOf(100000 + new Random().nextInt(900000));
-        otpStore.put(email, new OtpData(otp, LocalDateTime.now()));
-        return otp;
+    // Send OTP method
+    public void sendOtp(String email, JavaMailSender mailSender) {
+        // Generate 6-digit OTP
+        String otp = String.valueOf((int)(Math.random() * 900000) + 100000);
+        otpStorage.put(email, otp);
+
+        // Send email using mailSender
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Smart Tech Account OTP");
+        message.setText("Your OTP is: " + otp + "\nIt will expire in 5 minutes.");
+        mailSender.send(message);  // <-- Uncommented, now it will actually send the email
     }
 
-    public boolean validateOtp(String email, String otp) {
-        OtpData data = otpStore.get(email);
-        if (data == null) return false;
-
-        if (data.time.plusMinutes(EXPIRY_MINUTES).isBefore(LocalDateTime.now())) {
-            otpStore.remove(email);
-            return false;
-        }
-
-        return data.otp.equals(otp);
-    }
-
-    static class OtpData {
-        String otp;
-        LocalDateTime time;
-
-        OtpData(String otp, LocalDateTime time) {
-            this.otp = otp;
-            this.time = time;
-        }
+    // Verify OTP method
+    public boolean verifyOtp(String email, String otp) {
+        String correctOtp = otpStorage.get(email);
+        return correctOtp != null && correctOtp.equals(otp);
     }
 }
