@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(120deg,#1e90ff,#00c6ff);
+}
+
+.container {
+  background: #fff;
+  width: 350px;
+  padding: 25px;
+  margin: 80px auto;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.password-box {
+  display: flex;
+}
+
+.password-box span {
+  cursor: pointer;
+  padding: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #1e90ff;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.cancel {
+  background: gray;
+}
