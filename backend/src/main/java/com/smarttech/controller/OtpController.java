@@ -1,32 +1,40 @@
+package com.smarttech.controller;
+
+import com.smarttech.service.OtpService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @CrossOrigin
-@RequestMapping("/api")
+@RequestMapping("/api/otp")
 public class OtpController {
 
- @Autowired OtpService service;
- @Autowired JavaMailSender mail;
+    @Autowired
+    private OtpService otpService;
 
- @GetMapping("/send-otp")
- public void send(@RequestParam String email){
-  sendOtp(email);
- }
+    @Autowired
+    private JavaMailSender mailSender;
 
- @GetMapping("/resend-otp")
- public void resend(@RequestParam String email){
-  sendOtp(email);
- }
+    @GetMapping("/send")
+    public String sendOtp(@RequestParam String email) {
+        String otp = otpService.generateOtp(email);
 
- private void sendOtp(String email){
-  String otp=service.generate(email);
-  SimpleMailMessage msg=new SimpleMailMessage();
-  msg.setTo(email);
-  msg.setSubject("Smart Tech OTP");
-  msg.setText("Your OTP is "+otp+" (Valid for 5 minutes)");
-  mail.send(msg);
- }
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Smart Tech OTP Verification");
+        message.setText("Your OTP is: " + otp + " (Valid for 5 minutes)");
 
- @GetMapping("/verify-otp")
- public String verify(@RequestParam String email,@RequestParam String otp){
-  return service.verify(email,otp);
- }
+        mailSender.send(message);
+        return "OTP sent successfully";
+    }
+
+    @GetMapping("/verify")
+    public String verifyOtp(@RequestParam String email,
+                            @RequestParam String otp) {
+        return otpService.validateOtp(email, otp)
+                ? "OTP Verified Successfully"
+                : "Invalid or Expired OTP";
+    }
 }
