@@ -3,19 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Smart Tech | Register</title>
-
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <link rel="stylesheet" href="style.css">
-
+<script src="script.js" defer></script>
 </head>
 
 <body>
-
 <div class="card">
     <h2>Smart Tech</h2>
     <p class="subtitle">Create your smart account</p>
@@ -29,7 +22,6 @@
     <input id="email" placeholder="Email Address">
     <textarea id="address" placeholder="Full Address"></textarea>
 
-    <!-- Password -->
     <div class="password-wrapper">
         <input type="password" id="password" placeholder="Password" onkeyup="checkStrength()">
         <i class="fa-solid fa-eye" onclick="togglePassword('password',this)"></i>
@@ -37,7 +29,6 @@
 
     <div id="strengthMessage" class="strength"></div>
 
-    <!-- Confirm Password -->
     <div class="password-wrapper">
         <input type="password" id="confirm" placeholder="Confirm Password">
         <i class="fa-solid fa-eye" onclick="togglePassword('confirm',this)"></i>
@@ -47,99 +38,5 @@
 
     <p class="footer-text">© 2025 Smart Tech. All rights reserved.</p>
 </div>
-
-<script>
-/* =========================
-   PASSWORD TOGGLE
-========================= */
-function togglePassword(id, icon){
-    const field = document.getElementById(id);
-    if(field.type === "password"){
-        field.type = "text";
-        icon.classList.replace("fa-eye","fa-eye-slash");
-    } else {
-        field.type = "password";
-        icon.classList.replace("fa-eye-slash","fa-eye");
-    }
-}
-
-/* =========================
-   PASSWORD STRENGTH
-========================= */
-function checkStrength(){
-    const password = document.getElementById("password").value;
-    const msg = document.getElementById("strengthMessage");
-
-    if(password.length === 0){
-        msg.innerHTML = "";
-        return;
-    }
-
-    let strength = 0;
-    if(password.length >= 8) strength++;
-    if(/[A-Z]/.test(password)) strength++;
-    if(/[0-9]/.test(password)) strength++;
-    if(/[^A-Za-z0-9]/.test(password)) strength++;
-
-    if(strength <= 1){
-        msg.textContent = "Weak Password";
-        msg.className = "strength weak";
-    } else if(strength <= 3){
-        msg.textContent = "Medium Password";
-        msg.className = "strength medium";
-    } else {
-        msg.textContent = "Strong Password";
-        msg.className = "strength strong";
-    }
-}
-
-/* =========================
-   DYNAMIC NAME ATTRIBUTES
-========================= */
-function generateAlphaNum(len=8){
-    const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-    let out = "";
-    for(let i=0;i<len;i++){
-        out += chars[Math.floor(Math.random()*chars.length)];
-    }
-    return out;
-}
-
-document.querySelectorAll("input").forEach(input=>{
-    if(input.id){
-        input.name = input.id + "_" + generateAlphaNum();
-    }
-});
-
-/* =========================
-   REGISTER LOGIC
-========================= */
-function register(){
-    const passwordEl = document.getElementById("password");
-    const confirmEl = document.getElementById("confirm");
-
-    if(passwordEl.value !== confirmEl.value){
-        alert("Passwords do not match");
-        return;
-    }
-
-    const userData = {
-        fname: document.getElementById("fname").value,
-        lname: document.getElementById("lname").value,
-        mobile: document.getElementById("mobileNum").value,
-        address: document.getElementById("address").value,
-        email: document.getElementById("email").value,
-        password: passwordEl.value
-    };
-
-    localStorage.setItem("userData", JSON.stringify(userData));
-
-    // Send OTP and navigate to OTP page
-    fetch("https://YOUR-BACKEND-URL/api/send-otp?email=" + userData.email)
-        .then(()=> window.location.href="otp.html")
-        .catch(err => alert("Error sending OTP: "+err));
-}
-</script>
-
 </body>
 </html>
