@@ -1,45 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Smart Tech | Register</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
-body{font-family:Poppins;background:linear-gradient(135deg,#1f4037,#99f2c8);display:flex;justify-content:center;align-items:center;height:100vh}
-.card{background:#fff;padding:30px;width:420px;border-radius:15px}
-input{width:100%;padding:12px;margin-bottom:10px;border-radius:8px;border:1px solid #ccc}
-button{width:100%;padding:12px;background:#1f4037;color:#fff;border:none;border-radius:8px;font-size:16px}
+*{
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#1f4037,#99f2c8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:420px;
+    background:#fff;
+    padding:30px 35px;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+    color:#1f4037;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    text-align:center;
+    font-size:14px;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.input-group{
+    display:flex;
+    gap:10px;
+}
+
+.input-group input{
+    width:50%;
+}
+
+input, textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:14px;
+}
+
+textarea{
+    resize:none;
+    height:70px;
+}
+
+input:focus, textarea:focus{
+    border-color:#1f4037;
+    outline:none;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper i{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#777;
+}
+
+.strength{
+    font-size:13px;
+    margin-bottom:12px;
+    font-weight:500;
+}
+
+.weak{color:red;}
+.medium{color:orange;}
+.strong{color:green;}
+
+button{
+    width:100%;
+    padding:12px;
+    background:linear-gradient(135deg,#1f4037,#2ecc71);
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+    transition:transform 0.2s ease;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.footer-text{
+    text-align:center;
+    font-size:12px;
+    color:#777;
+    margin-top:15px;
+}
 </style>
 </head>
 
 <body>
+
 <div class="card">
-<h2>Smart Tech - Register</h2>
+    <h2>Smart Tech</h2>
+    <p class="subtitle">Create your smart account</p>
 
-<input id="fname" placeholder="First Name">
-<input id="lname" placeholder="Last Name">
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-<input id="confirm" type="password" placeholder="Confirm Password">
+    <div class="input-group">
+        <input id="fname" placeholder="First Name">
+        <input id="lname" placeholder="Last Name">
+    </div>
 
-<button onclick="register()">Register</button>
+    <input id="mobileNum" placeholder="Mobile Number">
+    <input id="email" placeholder="Email Address">
+    <textarea id="address" placeholder="Full Address"></textarea>
+
+    <!-- Password -->
+    <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Password" onkeyup="checkStrength()">
+        <i class="fa-solid fa-eye" onclick="togglePassword('password',this)"></i>
+    </div>
+
+    <div id="strengthMessage" class="strength"></div>
+
+    <!-- Confirm Password -->
+    <div class="password-wrapper">
+        <input type="password" id="confirm" placeholder="Confirm Password">
+        <i class="fa-solid fa-eye" onclick="togglePassword('confirm',this)"></i>
+    </div>
+
+    <!-- Button text changed -->
+    <button onclick="register()">Register</button>
+
+    <p class="footer-text">© 2025 Smart Tech. All rights reserved.</p>
 </div>
 
 <script>
+/* =========================
+   PASSWORD TOGGLE
+========================= */
+function togglePassword(id, icon){
+    const field = document.getElementById(id);
+    if(field.type === "password"){
+        field.type = "text";
+        icon.classList.replace("fa-eye","fa-eye-slash");
+    }else{
+        field.type = "password";
+        icon.classList.replace("fa-eye-slash","fa-eye");
+    }
+}
+
+/* =========================
+   PASSWORD STRENGTH
+========================= */
+function checkStrength(){
+    const password = document.getElementById("password").value;
+    const msg = document.getElementById("strengthMessage");
+
+    if(password.length === 0){
+        msg.innerHTML = "";
+        return;
+    }
+
+    let strength = 0;
+    if(password.length >= 8) strength++;
+    if(/[A-Z]/.test(password)) strength++;
+    if(/[0-9]/.test(password)) strength++;
+    if(/[^A-Za-z0-9]/.test(password)) strength++;
+
+    if(strength <= 1){
+        msg.textContent = "Weak Password";
+        msg.className = "strength weak";
+    }else if(strength <= 3){
+        msg.textContent = "Medium Password";
+        msg.className = "strength medium";
+    }else{
+        msg.textContent = "Strong Password";
+        msg.className = "strength strong";
+    }
+}
+
+/* =========================
+   DYNAMIC NAME ATTRIBUTES
+========================= */
+function generateAlphaNum(len=8){
+    const chars="abcdefghijklmnopqrstuvwxyz0123456789";
+    let out="";
+    for(let i=0;i<len;i++){
+        out+=chars[Math.floor(Math.random()*chars.length)];
+    }
+    return out;
+}
+
+document.querySelectorAll("input, textarea").forEach(el=>{
+    if(el.id){
+        el.name = el.id + "_" + generateAlphaNum();
+    }
+});
+
+/* =========================
+   REGISTER → OTP PAGE
+========================= */
 function register(){
- if(password.value!==confirm.value){
-  alert("Passwords do not match"); return;
- }
+    if(password.value !== confirm.value){
+        alert("Passwords do not match");
+        return;
+    }
 
- localStorage.setItem("userData",JSON.stringify({
-  fname:fname.value,
-  lname:lname.value,
-  email:email.value,
-  password:password.value
- }));
+    localStorage.setItem("userData", JSON.stringify({
+        fname: fname.value,
+        lname: lname.value,
+        mobile: mobileNum.value,
+        address: address.value,
+        email: email.value,
+        password: password.value
+    }));
 
- fetch("https://YOUR-BACKEND-URL/api/send-otp?email="+email.value)
- .then(()=> window.location.href="otp.html");
+    fetch("https://YOUR-BACKEND-URL/api/send-otp?email=" + email.value)
+        .then(() => window.location.href = "otp.html");
 }
 </script>
+
 </body>
 </html>
