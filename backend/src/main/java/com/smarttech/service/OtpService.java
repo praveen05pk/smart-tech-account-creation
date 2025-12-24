@@ -18,12 +18,12 @@ public class OtpService {
         String otp = String.valueOf((int)(Math.random() * 900000) + 100000);
         otpStorage.put(email, otp);
 
-        // Send email using mailSender
+        // Send email
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject("Smart Tech Account OTP");
         message.setText("Your OTP is: " + otp + "\nIt will expire in 5 minutes.");
-        mailSender.send(message);  // <-- Uncommented, now it will actually send the email
+        mailSender.send(message);
     }
 
     // Verify OTP method
