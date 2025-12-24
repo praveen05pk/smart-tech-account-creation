@@ -3,30 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Smart Tech | OTP Verification</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
 </head>
 
 <body>
-
 <div class="card">
-    <h2>OTP Verification</h2>
-    <p class="subtitle">Enter the OTP sent to your email</p>
-
+    <h2>Email OTP Verification</h2>
     <p class="timer" id="timer">OTP expires in 05:00</p>
 
     <input id="otp" placeholder="Enter OTP">
+    <div id="msg" style="color:red;margin-bottom:10px"></div>
 
-    <div class="btn-group">
-        <button onclick="verifyOtp()">Submit</button>
+    <div style="display:flex;justify-content:space-between">
+        <button class="submit" onclick="verifyOtp()">Submit</button>
         <button class="cancel" onclick="cancel()">Cancel</button>
     </div>
 
     <button class="resend" onclick="resendOtp()">Resend OTP</button>
 </div>
-
-<script src="script.js"></script>
 </body>
 </html>
