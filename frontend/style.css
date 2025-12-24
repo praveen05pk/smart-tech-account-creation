@@ -1,14 +1,13 @@
-/* =========================
-   GENERAL RESET AND FONT
-========================= */
+/* ================================
+   GLOBAL STYLES
+================================= */
 * {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
 }
 
 body {
+    margin: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -16,9 +15,6 @@ body {
     background: linear-gradient(135deg, #1f4037, #99f2c8);
 }
 
-/* =========================
-   CARD STYLING
-========================= */
 .card {
     width: 420px;
     background: #fff;
@@ -27,9 +23,6 @@ body {
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
-/* =========================
-   HEADINGS AND SUBTITLES
-========================= */
 h2 {
     text-align: center;
     color: #1f4037;
@@ -43,9 +36,9 @@ h2 {
     margin-bottom: 25px;
 }
 
-/* =========================
-   INPUT GROUPS (SIDE-BY-SIDE)
-========================= */
+/* ================================
+   INPUT STYLES
+================================= */
 .input-group {
     display: flex;
     gap: 10px;
@@ -55,10 +48,7 @@ h2 {
     width: 50%;
 }
 
-/* =========================
-   INPUT AND TEXTAREA STYLING
-========================= */
-input, textarea {
+input, textarea, select {
     width: 100%;
     padding: 12px;
     margin-bottom: 12px;
@@ -72,14 +62,14 @@ textarea {
     height: 70px;
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
     border-color: #1f4037;
     outline: none;
 }
 
-/* =========================
-   PASSWORD WRAPPER AND EYE ICON
-========================= */
+/* ================================
+   PASSWORD TOGGLE
+================================= */
 .password-wrapper {
     position: relative;
 }
@@ -93,9 +83,9 @@ input:focus, textarea:focus {
     color: #777;
 }
 
-/* =========================
-   PASSWORD STRENGTH MESSAGE
-========================= */
+/* ================================
+   PASSWORD STRENGTH
+================================= */
 .strength {
     font-size: 13px;
     margin-bottom: 12px;
@@ -106,13 +96,13 @@ input:focus, textarea:focus {
 .medium { color: orange; }
 .strong { color: green; }
 
-/* =========================
+/* ================================
    BUTTONS
-========================= */
+================================= */
 button {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #1f4037, #2ecc71);
+    background: linear-gradient(135deg,#1f4037,#2ecc71);
     color: white;
     border: none;
     border-radius: 10px;
@@ -125,59 +115,42 @@ button:hover {
     transform: scale(1.03);
 }
 
-/* =========================
-   FOOTER TEXT
-========================= */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+button.resend {
+    background: none;
+    color: #1f4037;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
+/* ================================
+   RADIO/CHECKBOX STYLES
+================================= */
+.radio-group label,
+.checkbox-group label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* ================================
+   DOB GROUP
+================================= */
+.dob-group {
+    display: flex;
+    gap: 5px;
+}
+
+/* ================================
+   FOOTER
+================================= */
 .footer-text {
     text-align: center;
     font-size: 12px;
     color: #777;
     margin-top: 15px;
-}
-
-/* =========================
-   MULTI-STEP FORM SUPPORT
-========================= */
-.step-container {
-    display: none;
-}
-
-.step-container.active {
-    display: block;
-}
-
-/* =========================
-   CHECKBOX AND RADIO BUTTONS
-========================= */
-.checkbox-group, .radio-group {
-    margin-bottom: 12px;
-}
-
-.checkbox-group label, .radio-group label {
-    margin-right: 15px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* =========================
-   FILE UPLOAD
-========================= */
-input[type="file"] {
-    padding: 5px;
-    margin-top: 5px;
-}
-
-/* =========================
-   MULTI-SELECT DROPDOWNS
-========================= */
-select[multiple] {
-    height: 100px;
-}
-
-/* =========================
-   REFRESH BUTTON (FOR MULTI-STEP)
-========================= */
-.refresh-btn {
-    background: gray;
-    margin-top: 10px;
 }
