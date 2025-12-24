@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Tech | Additional Info</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+<div class="card form-step" id="step2">
+    <h2>Smart Tech</h2>
+    <p class="subtitle">Additional Information</p>
+
+    <!-- Gender -->
+    <label>Gender:</label>
+    <label><input type="radio" name="gender" value="Male"> Male</label>
+    <label><input type="radio" name="gender" value="Female"> Female</label>
+    <label><input type="radio" name="gender" value="Other"> Other</label>
+
+    <!-- Hobbies -->
+    <label>Hobbies:</label>
+    <label><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
+    <label><input type="checkbox" name="hobbies" value="Traveling"> Traveling</label>
+    <label><input type="checkbox" name="hobbies" value="Gaming"> Gaming</label>
+    <label><input type="checkbox" name="hobbies" value="Music"> Music</label>
+
+    <!-- Photo upload -->
+    <label>Upload Photo:</label>
+    <input type="file" id="photo" accept="image/*">
+
+    <button onclick="goToStep3()">Next</button>
+    <button onclick="refreshStep2()">Refresh</button>
+</div>
+</body>
+</html>
