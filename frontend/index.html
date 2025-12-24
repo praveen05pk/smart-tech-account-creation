@@ -9,9 +9,9 @@
 </head>
 
 <body>
-<div class="card form-step" id="step1">
+<div class="card">
     <h2>Smart Tech</h2>
-    <p class="subtitle">Enter your basic information</p>
+    <p class="subtitle">Create your smart account</p>
 
     <div class="input-group">
         <input id="fname" placeholder="First Name">
@@ -26,6 +26,7 @@
         <input type="password" id="password" placeholder="Password" onkeyup="checkStrength()">
         <i class="fa-solid fa-eye" onclick="togglePassword('password',this)"></i>
     </div>
+
     <div id="strengthMessage" class="strength"></div>
 
     <div class="password-wrapper">
@@ -33,7 +34,9 @@
         <i class="fa-solid fa-eye" onclick="togglePassword('confirm',this)"></i>
     </div>
 
-    <button onclick="goToStep2()">Next</button>
+    <button id="nextStep1">Next</button>
+
+    <p class="footer-text">© 2025 Smart Tech. All rights reserved.</p>
 </div>
 </body>
 </html>
