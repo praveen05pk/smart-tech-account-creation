@@ -2,69 +2,71 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart Tech | Personal Details</title>
+<title>Smart Tech | Profile Info</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
-
 <body>
-<div class="card form-step" id="step3">
-    <h2>Smart Tech</h2>
-    <p class="subtitle">Personal Details</p>
+<div class="card">
+    <h2>Profile Info</h2>
 
-    <!-- Country -->
-    <label for="country">Select Country:</label>
+    <label>Country:</label>
     <select id="country">
-        <option value="">Select</option>
+        <option value="">Select Country</option>
         <option value="India">India</option>
         <option value="USA">USA</option>
         <option value="UK">UK</option>
-        <option value="Australia">Australia</option>
         <option value="Canada">Canada</option>
+        <option value="Australia">Australia</option>
     </select>
 
-    <!-- Date of Birth -->
     <label>Date of Birth:</label>
-    <select id="dobYear"></select>
-    <select id="dobMonth">
-        <option value="">Month</option>
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
-    <input type="number" id="dobDay" placeholder="Day" min="1" max="31">
+    <div class="dob-group">
+        <select id="dobYear">
+            <option value="">Year</option>
+            <!-- Add years dynamically in JS -->
+        </select>
+        <select id="dobMonth">
+            <option value="">Month</option>
+            <option value="1">Jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">Aug</option>
+            <option value="9">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+        </select>
+        <input type="number" id="dobDay" placeholder="Day">
+    </div>
 
-    <!-- Language -->
-    <label for="language">Language:</label>
+    <label>Language:</label>
     <select id="language">
-        <option value="">Select</option>
+        <option value="">Select Language</option>
         <option value="English">English</option>
         <option value="Hindi">Hindi</option>
         <option value="Spanish">Spanish</option>
         <option value="French">French</option>
     </select>
 
-    <!-- Skills -->
-    <label for="skills">Skills:</label>
+    <label>Skills:</label>
     <select id="skills" multiple>
         <option value="Java">Java</option>
         <option value="Python">Python</option>
-        <option value="Selenium">Selenium</option>
         <option value="JavaScript">JavaScript</option>
-        <option value="React">React</option>
+        <option value="Selenium">Selenium</option>
+        <option value="SQL">SQL</option>
     </select>
 
-    <button onclick="submitRegistration()">Register</button>
+    <div class="button-group">
+        <button id="refreshStep3">Refresh</button>
+        <button id="registerFinal">Register</button>
+    </div>
 </div>
 </body>
 </html>
