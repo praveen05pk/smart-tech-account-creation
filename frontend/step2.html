@@ -7,31 +7,32 @@
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
-
 <body>
-<div class="card form-step" id="step2">
-    <h2>Smart Tech</h2>
-    <p class="subtitle">Additional Information</p>
+<div class="card">
+    <h2>Additional Info</h2>
 
-    <!-- Gender -->
     <label>Gender:</label>
-    <label><input type="radio" name="gender" value="Male"> Male</label>
-    <label><input type="radio" name="gender" value="Female"> Female</label>
-    <label><input type="radio" name="gender" value="Other"> Other</label>
+    <div class="radio-group">
+        <label><input type="radio" name="gender" value="Male"> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label><input type="radio" name="gender" value="Other"> Other</label>
+    </div>
 
-    <!-- Hobbies -->
     <label>Hobbies:</label>
-    <label><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
-    <label><input type="checkbox" name="hobbies" value="Traveling"> Traveling</label>
-    <label><input type="checkbox" name="hobbies" value="Gaming"> Gaming</label>
-    <label><input type="checkbox" name="hobbies" value="Music"> Music</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" value="Reading"> Reading</label>
+        <label><input type="checkbox" value="Traveling"> Traveling</label>
+        <label><input type="checkbox" value="Gaming"> Gaming</label>
+        <label><input type="checkbox" value="Sports"> Sports</label>
+    </div>
 
-    <!-- Photo upload -->
     <label>Upload Photo:</label>
-    <input type="file" id="photo" accept="image/*">
+    <input type="file" id="photo">
 
-    <button onclick="goToStep3()">Next</button>
-    <button onclick="refreshStep2()">Refresh</button>
+    <div class="button-group">
+        <button id="refreshStep2">Refresh</button>
+        <button id="nextStep2">Next</button>
+    </div>
 </div>
 </body>
 </html>
