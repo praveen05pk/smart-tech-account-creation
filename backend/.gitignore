@@ -1,3 +1,6 @@
 /target/
 *.log
-*.env
+*.class
+*.jar
+*.war
+.DS_Store
