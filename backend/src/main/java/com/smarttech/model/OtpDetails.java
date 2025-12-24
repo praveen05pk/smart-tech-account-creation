@@ -1,10 +1,14 @@
-public class OtpDetails {
- private String otp;
- private long expiry;
+package com.smarttech.model;
 
- public OtpDetails(String otp,long expiry){
-  this.otp=otp; this.expiry=expiry;
- }
- public String getOtp(){return otp;}
- public long getExpiry(){return expiry;}
+public class OtpDetails {
+    private String otp;
+    private long expiry;
+
+    public OtpDetails(String otp, long expiry){
+        this.otp = otp;
+        this.expiry = expiry;
+    }
+
+    public String getOtp() { return otp; }
+    public long getExpiry() { return expiry; }
 }
